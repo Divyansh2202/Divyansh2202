@@ -28,7 +28,7 @@ debuggable under real traffic.
 ## 🧩 toolcontract — contract testing for LLM tool-calls
 
 <a href="https://pypi.org/project/toolcontract/"><img alt="PyPI" src="https://img.shields.io/pypi/v/toolcontract?style=flat-square&logo=pypi&logoColor=white&label=PyPI&color=007b7c&labelColor=0b1015"></a>
-<a href="https://pypistats.org/packages/toolcontract"><img alt="Downloads" src="https://img.shields.io/pypi/dm/toolcontract?style=flat-square&label=downloads&color=6d4bd6&labelColor=0b1015"></a>
+<a href="https://github.com/Divyansh2202/toolcontract/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-6d4bd6?style=flat-square&labelColor=0b1015"></a>
 <a href="https://github.com/Divyansh2202/toolcontract/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Divyansh2202/toolcontract/actions/workflows/ci.yml/badge.svg"></a>
 
 **The problem.** A provider ships a new model version and your agent's
