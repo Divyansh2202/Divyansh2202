@@ -29,51 +29,43 @@ debuggable under real traffic.
 
 ---
 
-## 🗺 mapcraft — maps that refuse to mislead
+## 🧠 mnemos — a memory layer for AI assistants
 
-<a href="https://github.com/Divyansh2202/mapcraft"><img alt="Repo" src="https://img.shields.io/badge/GitHub-mapcraft-181717?style=flat-square&logo=github&logoColor=white&labelColor=0b1015"></a>
-<a href="https://github.com/Divyansh2202/mapcraft/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Divyansh2202/mapcraft/actions/workflows/ci.yml/badge.svg"></a>
-<a href="https://github.com/Divyansh2202/mapcraft/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-6d4bd6?style=flat-square&labelColor=0b1015"></a>
-<img alt="Dependencies" src="https://img.shields.io/badge/dependencies-zero-15803d?style=flat-square&labelColor=0b1015">
+<img alt="" src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=15&pause=1400&color=0CC3C3&width=820&lines=Assistants+forget+everything+between+sessions;mnemos+makes+context+follow+the+person%2C+not+the+tool;FastAPI+%C2%B7+pgvector+%C2%B7+Chrome+MV3+%C2%B7+MCP">
 
-**The problem.** Map raw counts across regions of different population and you
-have drawn a map of population wearing the costume of whatever you counted. It
-is the most common error in thematic mapping and it is invisible — the map
-renders cleanly, fills every region, and looks finished.
+<a href="https://github.com/Divyansh2202/mnemos"><img alt="Repo" src="https://img.shields.io/badge/GitHub-mnemos-181717?style=flat-square&logo=github&logoColor=white&labelColor=0b1015"></a>
+<a href="https://github.com/Divyansh2202/mnemos/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/Divyansh2202/mnemos?style=flat-square&color=f0b23f&labelColor=0b1015"></a>
+<a href="https://divyanshrai.dev/projects/mnemos"><img alt="Live demo" src="https://img.shields.io/badge/Live-interactive%20demo-007b7c?style=flat-square&logo=vercel&logoColor=white&labelColor=0b1015"></a>
 
-<div align="center">
-<img alt="Same Census data: raw counts versus per capita" src="https://raw.githubusercontent.com/Divyansh2202/mapcraft/main/gallery/01-normalisation-before.png" width="49%">
-<img alt="Birth rate per 1,000 residents" src="https://raw.githubusercontent.com/Divyansh2202/mapcraft/main/gallery/01-normalisation-after.png" width="49%">
-</div>
+Assistants forget everything between sessions. mnemos extracts facts from
+conversations, embeds them, and injects the relevant ones before each new
+message — invisibly, across ChatGPT and Claude. Memories live per *user*, not
+per platform, so context follows the person instead of resetting with the tool.
 
-Same US Census file, same projection. The left map correlates **0.9921** with
-state population; the right one, normalised, correlates **0.0616**. Five of the
-top six states change.
+```mermaid
+flowchart LR
+    U["You type<br/>in ChatGPT / Claude"] --> E["Chrome extension<br/><i>MV3</i>"]
+    E -->|"intercept"| API["FastAPI"]
+    API --> X["Extract facts<br/><i>LLM</i>"]
+    X --> EM["Embed<br/><i>bge-m3</i>"]
+    EM --> DB[("PostgreSQL<br/>+ pgvector")]
+    API -->|"retrieve top-k"| DB
+    DB --> INJ["Inject context"]
+    INJ --> P["Prompt the model<br/>actually sees"]
 
-**The idea.** Make the decisions a choropleth actually requires — normalisation,
-classification, equal-area projection, colourblind-safe palettes — refuse to
-render when the result would mislead, and print every decision on the map
-itself so a reader can check the work.
-
-```python
->>> mapcraft.choropleth(births_by_county, pack="us-counties-2021")
-UnnormalizedCounts: values are whole numbers and correlate 0.99 with
-population; a map of these would largely be a map of where people live.
+    style E fill:#f0b23f,stroke:#f0b23f,color:#000
+    style API fill:#6d4bd6,stroke:#6d4bd6,color:#fff
+    style DB fill:#007b7c,stroke:#007b7c,color:#fff
+    style P fill:#15803d,stroke:#15803d,color:#fff
 ```
 
-Zero runtime dependencies — the Albers and Mollweide projection maths,
-Fisher-Jenks classification, TopoJSON decoding and SVG emission are all
-implemented directly. Four bundled geography packs pin boundary and population
-vintages together, because pairing 2024 population with 2021 boundaries
-silently divides some rates by the wrong denominator.
-
-> **Honest limit:** below about 20 regions the count detection cannot tell
-> counts from rates — eight hand-picked states of real count data score 0.64
-> correlation, which reads as "rate". It says so and asks, rather than guessing.
+`FastAPI` · `PostgreSQL + pgvector` · `Ollama` · `Chrome Extension (MV3)` · `MCP`
 
 ---
 
 ## 🧩 toolcontract — contract testing for LLM tool-calls
+
+<img alt="" src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=15&pause=1400&color=9D7BFF&width=820&lines=A+model+update+silently+changed+your+agent's+tool+calls;Your+tests+passed.+You+found+out+in+production;Pin+the+calls.+Catch+the+drift+in+CI">
 
 <a href="https://pypi.org/project/toolcontract/"><img alt="PyPI" src="https://img.shields.io/pypi/v/toolcontract?style=flat-square&logo=pypi&logoColor=white&label=PyPI&color=007b7c&labelColor=0b1015"></a>
 <a href="https://github.com/Divyansh2202/toolcontract/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-6d4bd6?style=flat-square&labelColor=0b1015"></a>
@@ -130,35 +122,49 @@ ledger, OpenAI / Anthropic / LiteLLM adapters, a CLI (`run` / `accept` /
 
 ---
 
-## 🧠 mnemos — a memory layer for AI assistants
+## 🗺 mapcraft — maps that refuse to mislead
 
-<a href="https://github.com/Divyansh2202/mnemos"><img alt="Repo" src="https://img.shields.io/badge/GitHub-mnemos-181717?style=flat-square&logo=github&logoColor=white&labelColor=0b1015"></a>
-<a href="https://github.com/Divyansh2202/mnemos/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/Divyansh2202/mnemos?style=flat-square&color=f0b23f&labelColor=0b1015"></a>
-<a href="https://divyanshrai.dev/projects/mnemos"><img alt="Live demo" src="https://img.shields.io/badge/Live-interactive%20demo-007b7c?style=flat-square&logo=vercel&logoColor=white&labelColor=0b1015"></a>
+<img alt="" src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=15&pause=1400&color=F0B23F&width=820&lines=Your+map+is+probably+a+population+map;0.9921+correlation+with+population+%E2%80%94+before+normalising;0.0616+%E2%80%94+after.+Five+of+the+top+six+states+change">
 
-Assistants forget everything between sessions. mnemos extracts facts from
-conversations, embeds them, and injects the relevant ones before each new
-message — invisibly, across ChatGPT and Claude. Memories live per *user*, not
-per platform, so context follows the person instead of resetting with the tool.
+<a href="https://github.com/Divyansh2202/mapcraft"><img alt="Repo" src="https://img.shields.io/badge/GitHub-mapcraft-181717?style=flat-square&logo=github&logoColor=white&labelColor=0b1015"></a>
+<a href="https://github.com/Divyansh2202/mapcraft/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Divyansh2202/mapcraft/actions/workflows/ci.yml/badge.svg"></a>
+<a href="https://github.com/Divyansh2202/mapcraft/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-6d4bd6?style=flat-square&labelColor=0b1015"></a>
+<img alt="Dependencies" src="https://img.shields.io/badge/dependencies-zero-15803d?style=flat-square&labelColor=0b1015">
 
-```mermaid
-flowchart LR
-    U["You type<br/>in ChatGPT / Claude"] --> E["Chrome extension<br/><i>MV3</i>"]
-    E -->|"intercept"| API["FastAPI"]
-    API --> X["Extract facts<br/><i>LLM</i>"]
-    X --> EM["Embed<br/><i>bge-m3</i>"]
-    EM --> DB[("PostgreSQL<br/>+ pgvector")]
-    API -->|"retrieve top-k"| DB
-    DB --> INJ["Inject context"]
-    INJ --> P["Prompt the model<br/>actually sees"]
+**The problem.** Map raw counts across regions of different population and you
+have drawn a map of population wearing the costume of whatever you counted. It
+is the most common error in thematic mapping and it is invisible — the map
+renders cleanly, fills every region, and looks finished.
 
-    style E fill:#f0b23f,stroke:#f0b23f,color:#000
-    style API fill:#6d4bd6,stroke:#6d4bd6,color:#fff
-    style DB fill:#007b7c,stroke:#007b7c,color:#fff
-    style P fill:#15803d,stroke:#15803d,color:#fff
+<div align="center">
+<img alt="Same Census data: raw counts versus per capita" src="https://raw.githubusercontent.com/Divyansh2202/mapcraft/main/gallery/01-normalisation-before.png" width="49%">
+<img alt="Birth rate per 1,000 residents" src="https://raw.githubusercontent.com/Divyansh2202/mapcraft/main/gallery/01-normalisation-after.png" width="49%">
+</div>
+
+Same US Census file, same projection. The left map correlates **0.9921** with
+state population; the right one, normalised, correlates **0.0616**. Five of the
+top six states change.
+
+**The idea.** Make the decisions a choropleth actually requires — normalisation,
+classification, equal-area projection, colourblind-safe palettes — refuse to
+render when the result would mislead, and print every decision on the map
+itself so a reader can check the work.
+
+```python
+>>> mapcraft.choropleth(births_by_county, pack="us-counties-2021")
+UnnormalizedCounts: values are whole numbers and correlate 0.99 with
+population; a map of these would largely be a map of where people live.
 ```
 
-`FastAPI` · `PostgreSQL + pgvector` · `Ollama` · `Chrome Extension (MV3)` · `MCP`
+Zero runtime dependencies — the Albers and Mollweide projection maths,
+Fisher-Jenks classification, TopoJSON decoding and SVG emission are all
+implemented directly. Four bundled geography packs pin boundary and population
+vintages together, because pairing 2024 population with 2021 boundaries
+silently divides some rates by the wrong denominator.
+
+> **Honest limit:** below about 20 regions the count detection cannot tell
+> counts from rates — eight hand-picked states of real count data score 0.64
+> correlation, which reads as "rate". It says so and asks, rather than guessing.
 
 ---
 
@@ -199,6 +205,19 @@ Three systems serving real users at **TapHealth** (Mar 2025 – Jul 2026).
 | **Programming** | Python (Pandas, NumPy, SciPy) · SQL · OpenCV · NLTK · Streamlit · Hugging Face Transformers |
 | **Deployment & MLOps** | Docker · Git · CI/CD · Edge AI deployment · scalable inference systems |
 | **Data & Analytics** | Power BI · Matplotlib · Seaborn · SQL |
+
+
+---
+
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Divyansh2202/Divyansh2202/output/github-contribution-grid-snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Divyansh2202/Divyansh2202/output/github-contribution-grid-snake.svg">
+  <img alt="Contribution graph being eaten by a snake" src="https://raw.githubusercontent.com/Divyansh2202/Divyansh2202/output/github-contribution-grid-snake.svg" width="100%">
+</picture>
+
+</div>
 
 ---
 
