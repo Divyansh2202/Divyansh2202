@@ -3,7 +3,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Divyansh2202/Divyansh2202/main/banner-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Divyansh2202/Divyansh2202/main/banner-light.svg">
-  <img alt="Divyansh Rai — AI Engineer. Retrieval, model and agent layers. Available for hire." src="https://raw.githubusercontent.com/Divyansh2202/Divyansh2202/main/banner-light.svg" width="100%">
+  <img alt="Divyansh Rai — AI Engineer. Retrieval, model and agent layers. Open source: mnemos, toolcontract, mapcraft." src="https://raw.githubusercontent.com/Divyansh2202/Divyansh2202/main/banner-light.svg" width="100%">
 </picture>
 
 <br/><br/>
@@ -21,7 +21,55 @@ I take GenAI features from a notebook to production — fine-tuned LLMs and VLMs
 multi-agent orchestration, and RAG pipelines that stay fast, cheap, and
 debuggable under real traffic.
 
-**Available now** · Remote, hybrid or on-site · Open to relocating · IST, full overlap with EU and mornings with US East
+<div align="center">
+
+<img alt="Currently building" src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=19&pause=1200&color=0CC3C3&center=true&vCenter=true&width=760&lines=Three+open-source+tools%2C+all+published%3B;mnemos+%E2%80%94+memory+that+follows+you+across+assistants;toolcontract+%E2%80%94+catch+tool-call+drift+before+production;mapcraft+%E2%80%94+maps+that+refuse+to+mislead+you">
+
+</div>
+
+---
+
+## 🗺 mapcraft — maps that refuse to mislead
+
+<a href="https://github.com/Divyansh2202/mapcraft"><img alt="Repo" src="https://img.shields.io/badge/GitHub-mapcraft-181717?style=flat-square&logo=github&logoColor=white&labelColor=0b1015"></a>
+<a href="https://github.com/Divyansh2202/mapcraft/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Divyansh2202/mapcraft/actions/workflows/ci.yml/badge.svg"></a>
+<a href="https://github.com/Divyansh2202/mapcraft/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-6d4bd6?style=flat-square&labelColor=0b1015"></a>
+<img alt="Dependencies" src="https://img.shields.io/badge/dependencies-zero-15803d?style=flat-square&labelColor=0b1015">
+
+**The problem.** Map raw counts across regions of different population and you
+have drawn a map of population wearing the costume of whatever you counted. It
+is the most common error in thematic mapping and it is invisible — the map
+renders cleanly, fills every region, and looks finished.
+
+<div align="center">
+<img alt="Same Census data: raw counts versus per capita" src="https://raw.githubusercontent.com/Divyansh2202/mapcraft/main/gallery/01-normalisation-before.png" width="49%">
+<img alt="Birth rate per 1,000 residents" src="https://raw.githubusercontent.com/Divyansh2202/mapcraft/main/gallery/01-normalisation-after.png" width="49%">
+</div>
+
+Same US Census file, same projection. The left map correlates **0.9921** with
+state population; the right one, normalised, correlates **0.0616**. Five of the
+top six states change.
+
+**The idea.** Make the decisions a choropleth actually requires — normalisation,
+classification, equal-area projection, colourblind-safe palettes — refuse to
+render when the result would mislead, and print every decision on the map
+itself so a reader can check the work.
+
+```python
+>>> mapcraft.choropleth(births_by_county, pack="us-counties-2021")
+UnnormalizedCounts: values are whole numbers and correlate 0.99 with
+population; a map of these would largely be a map of where people live.
+```
+
+Zero runtime dependencies — the Albers and Mollweide projection maths,
+Fisher-Jenks classification, TopoJSON decoding and SVG emission are all
+implemented directly. Four bundled geography packs pin boundary and population
+vintages together, because pairing 2024 population with 2021 boundaries
+silently divides some rates by the wrong denominator.
+
+> **Honest limit:** below about 20 regions the count detection cannot tell
+> counts from rates — eight hand-picked states of real count data score 0.64
+> correlation, which reads as "rate". It says so and asks, rather than guessing.
 
 ---
 
@@ -156,9 +204,13 @@ Three systems serving real users at **TapHealth** (Mar 2025 – Jul 2026).
 
 <div align="center">
 
-### Building something that needs an AI engineer who ships?
+### Building in the open
+
+<img alt="GitHub stats" src="https://github-readme-stats.vercel.app/api?username=Divyansh2202&show_icons=true&hide_border=true&bg_color=0b1015&title_color=0cc3c3&icon_color=6d4bd6&text_color=94a1ad&hide=issues&card_width=420">
+
+If any of this is useful, the repos are public and the issues are open.
 
 <a href="https://divyanshrai.dev"><img alt="Portfolio" src="https://img.shields.io/badge/divyanshrai.dev-visit-007b7c?style=for-the-badge&logo=safari&logoColor=white&labelColor=0b1015"></a>
-<a href="mailto:divyanshr988@gmail.com"><img alt="Email" src="https://img.shields.io/badge/divyanshr988@gmail.com-email%20me-c2410c?style=for-the-badge&logo=maildotru&logoColor=white&labelColor=0b1015"></a>
+<a href="mailto:divyanshr988@gmail.com"><img alt="Email" src="https://img.shields.io/badge/divyanshr988@gmail.com-say%20hello-c2410c?style=for-the-badge&logo=maildotru&logoColor=white&labelColor=0b1015"></a>
 
 </div>
