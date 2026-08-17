@@ -206,7 +206,6 @@ Three systems serving real users at **TapHealth** (Mar 2025 – Jul 2026).
 
 ### Building in the open
 
-<img alt="GitHub stats" src="https://github-readme-stats.vercel.app/api?username=Divyansh2202&show_icons=true&hide_border=true&bg_color=0b1015&title_color=0cc3c3&icon_color=6d4bd6&text_color=94a1ad&hide=issues&card_width=420">
 
 If any of this is useful, the repos are public and the issues are open.
 
